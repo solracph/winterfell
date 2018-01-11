@@ -4,6 +4,6 @@ dashboard works!
 
 <ul>
   <li *ngFor="let item of items | async">
-    {{ item.name }}
+    {{ item.payload.val().text }}
   </li>
 </ul>
