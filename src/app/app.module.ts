@@ -6,6 +6,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AppService } from './app.service';
+import { DashboardService } from '../app/dashboard/dashboard.service';
 
 const appRoutes: Routes = [
   { path:'home', component: AppComponent, data: { title: 'Home' } },
@@ -29,11 +31,11 @@ const config = {
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: true }),
+    RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [AppService,DashboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

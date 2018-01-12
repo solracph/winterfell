@@ -1,9 +1,7 @@
-import { Router, ActivatedRoute,RoutesRecognized  } from '@angular/router';
+import { Router, RoutesRecognized  } from '@angular/router';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
+import { AppService } from './app.service'
+
 
 @Component({
   selector: 'app-root',
@@ -12,15 +10,21 @@ import 'rxjs/add/operator/mergeMap';
 })
 export class AppComponent {
 
-  private routeData;
+  private title;
+  private url
 
-  constructor( private router: Router) {} 
+  constructor( private router: Router,private appService : AppService) {} 
    
   ngOnInit() {
     this.router.events.subscribe((data) => {
       if (data instanceof RoutesRecognized) {
-        this.routeData = data.state.root.firstChild.data;
+        this.title = data.state.root.firstChild.data["title"];
+        this.url = data.url;
       }
     });
+
+    console.log(this.appService.getPinga());
   }
+
+  
 }

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute  } from '@angular/router';
 import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
+import { DashboardService } from './dashboard.service'
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/switchMap';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -14,14 +12,11 @@ import 'rxjs/add/operator/switchMap';
 export class DashboardComponent implements OnInit {
 
   items: Observable<AngularFireAction<any>[]>;
-  size$: BehaviorSubject<string|null>;
-  private title;
 
-  constructor(db: AngularFireDatabase,private route : ActivatedRoute){
-    this.items = db.list('/items').snapshotChanges();
+  constructor(private service: DashboardService){
+    this.items = this.service.getItems();
   }
   
-   ngOnInit() {
-     this.title = this.route.snapshot.data.title;
+  ngOnInit() {
   }
 }
