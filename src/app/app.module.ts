@@ -8,8 +8,9 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
-  { path:'dashboard', component: DashboardComponent }//,
- /// { path:'', redirectTo:'/dashboard',pathMatch: 'full' }
+  { path:'home', component: AppComponent, data: { title: 'Home' } },
+  { path:'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
+  { path:'', redirectTo:'/home',pathMatch: 'full' }
 ]
 
 const config = {
