@@ -22,9 +22,5 @@ export class AppComponent {
         this.url = data.url;
       }
     });
-
-    console.log(this.appService.getPinga());
   }
-
-  
 }

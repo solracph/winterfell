@@ -5,8 +5,4 @@ export class AppService {
 
   constructor() { }
 
-  getPinga(){
-    return 'si';
-  }
-
 }

@@ -1,19 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AppRoutingModule }        from './app-routing.module';
 import { AppService } from './app.service';
-import { DashboardService } from '../app/dashboard/dashboard.service';
 
-const appRoutes: Routes = [
-  { path:'home', component: AppComponent, data: { title: 'Home' } },
-  { path:'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
-  { path:'', redirectTo:'/home',pathMatch: 'full' }
-]
+import { DashboardModule } from './dashboard/dashboard.module';
+import { DashboardService } from './dashboard/dashboard.service';
+
 
 const config = {
   apiKey: "AIzaSyB8jM7czKjRXgh1agOAFwtZ8AvQOsgnpxs",
@@ -25,17 +21,20 @@ const config = {
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent
-  ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
+    AppRoutingModule,
+    DashboardModule,
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule
   ],
-  providers: [AppService,DashboardService],
+  declarations: [
+    AppComponent
+  ],
+  providers: [
+    AppService,
+    DashboardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
