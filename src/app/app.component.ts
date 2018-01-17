@@ -1,3 +1,4 @@
+
 import { Router, RoutesRecognized  } from '@angular/router';
 import { Component } from '@angular/core';
 import { AppService } from './app.service'
@@ -11,9 +12,12 @@ import { AppService } from './app.service'
 export class AppComponent {
 
   private title;
-  private url
+  private url;
+  private drawerOpened;
 
-  constructor( private router: Router,private appService : AppService) {} 
+  constructor( private router: Router,private appService : AppService) {
+    this.drawerOpened = true;
+  } 
    
   ngOnInit() {
     this.router.events.subscribe((data) => {

@@ -23,7 +23,7 @@ body {
   
   .sidebar {
     position: fixed;
-    top: 51px;
+    top: 65px;
     bottom: 0;
     left: 0;
     z-index: 1000;
@@ -64,9 +64,82 @@ body {
   }
   
   .pt-3, .py-3{
-    padding-top: 4rem!important;
+    padding-top: 5rem!important;
   }
 
   .row{
       margin: 0 !important;
   }
+
+  .bg-blue{
+    background-color: #00a0e3 !important;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+  }
+
+  .bg-light{
+    background-color: #262f3d !important;
+  }
+  
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: #19212b;
+  }
+
+  .nav-pills .nav-link.active .icon-nav{
+    color: #fff;
+  }
+
+  .navbar-dark .navbar-brand{
+    color: #fff;
+    font-weight: 100;
+    font-size: 28px;
+  }
+  .nav-pills a:hover{
+    background-color: #19212b;
+  }
+  .nav-pills .nav-link{
+    margin-top: -1px;
+    padding: 20px;
+  }
+
+  .nav-pills a{
+    color: #fff; 
+  }
+  
+  .sub-nav{
+    list-style: none;
+  }
+
+  .icon-nav{
+    float: left;
+    margin-right: 10px;
+    color: #a7a9ae;
+  }
+  .nav-item a{
+    min-height: 64px;
+  }
+  .nav-pills .sub-nav-item .nav-link {
+    border:none !important;
+    margin-left: -40px;
+  }
+  
+  .example-container {
+    width: 500px;
+    height: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-sidenav {
+    padding: 20px;
+  }
+
+  .nav-pills .sub-nav-item .nav-link a span .d-none .d-sm-block{
+    font-size: 12px;
+  }
+  

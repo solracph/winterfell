@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule }        from './app-routing.module';
@@ -9,6 +10,8 @@ import { AppService } from './app.service';
 
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardService } from './dashboard/dashboard.service';
+import { CmaterialModule } from './cmaterial/cmaterial.module'
+
 
 
 const config = {
@@ -23,8 +26,10 @@ const config = {
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     DashboardModule,
+    CmaterialModule,
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule
   ],
