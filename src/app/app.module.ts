@@ -12,6 +12,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { DashboardService } from './dashboard/dashboard.service';
 import { CmaterialModule } from './cmaterial/cmaterial.module'
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 const config = {
@@ -31,7 +33,8 @@ const config = {
     DashboardModule,
     CmaterialModule,
     AngularFireModule.initializeApp(config),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent

@@ -1,3 +1,4 @@
+
 /*
  * Base structure
  */
@@ -92,6 +93,7 @@ body {
     color: #fff;
     font-weight: 100;
     font-size: 28px;
+    cursor: pointer;
   }
   .nav-pills a:hover{
     background-color: #19212b;
@@ -143,3 +145,14 @@ body {
     font-size: 12px;
   }
   
+  .container-fluid{
+    padding: 0;
+  }
+
+  .pt-3{
+    padding: 10px;
+    width: 80%;
+  }
+  h1 {
+    border: none;
+  }
