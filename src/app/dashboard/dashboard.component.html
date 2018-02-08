@@ -1,29 +1,50 @@
+<div class="row">
+    <div class="col-sm-12 box-shadow">
+            Drag Containers <input type="checkbox" [(ngModel)]="dragOperation"/>
+            Drag widget <input type="checkbox" [(ngModel)]="dragWidgetOperation"/>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".card-containers">
+                Collapse Containers
+            </button>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".card-widgets">
+                Collapse widgets
+            </button>
+    </div>
+</div>
 
-Drag Containers <input type="checkbox" [(ngModel)]="dragOperation"/>
-Drag widget <input type="checkbox" [(ngModel)]="dragWidgetOperation"/>
 <div class="row" dnd-sortable-container [sortableData]="containers" [dropZones]="['container-dropZone']">
     <div class="col-sm-12">
-        <div class="row" *ngFor="let container of containers; let i = index" dnd-sortable [sortableIndex]="i" [dragEnabled]="dragOperation">
-            <h3>{{container.name}}</h3>
+        <div class="row"  *ngFor="let container of containers; let i = index" dnd-sortable [sortableIndex]="i" [dragEnabled]="dragOperation">
             <div class="col-sm-12">
-                <div class="row" dnd-sortable-container [sortableData]="container.widgets" [dropZones]="['widget-dropZone']">
-                    <div class="col-sm-{{widget.width}}" *ngFor="let widget of container.widgets; let x = index"
-                        dnd-sortable [sortableIndex]="x" [dragEnabled]="dragWidgetOperation">
-                            <div class="box-shadow">
-                                <kendo-chart [categoryAxis]="{ categories: categories }">
-                                    <kendo-chart-title text="{{widget.name}}"></kendo-chart-title>
-                                    <kendo-chart-legend position="bottom" orientation="horizontal"></kendo-chart-legend>
-                                    <kendo-chart-tooltip format="{0}%"></kendo-chart-tooltip>
-                                    <kendo-chart-series>
-                                        <kendo-chart-series-item *ngFor="let item of series"
-                                            type="{{item.type}}" style="smooth" [data]="item.data" [name]="item.name">
-                                        </kendo-chart-series-item>
-                                    </kendo-chart-series>
-                                </kendo-chart>
+                <div class="card box-shadow">
+                    <div class="card-header deep-orange lighten-1 white-text">
+                        {{container.name}}
+                    </div>
+                    <div class="card-body card-containers collapse show">
+                        <div class="row" dnd-sortable-container [sortableData]="container.widgets" [dropZones]="['widget-dropZone']">
+                            <div class="col-sm-{{widget.width}} " *ngFor="let widget of container.widgets; let x = index"
+                                dnd-sortable [sortableIndex]="x" [dragEnabled]="dragWidgetOperation">
+                                    <div class="card box-shadow">
+                                        <div class="card-header deep-orange lighten-1 white-text"  >
+                                            {{widget.name}}
+                                        </div>
+                                        <div class="card-body card-widgets collapse show" >
+                                            <kendo-chart [categoryAxis]="{ categories: categories }">
+                                                <kendo-chart-legend position="bottom" orientation="horizontal"></kendo-chart-legend>
+                                                <kendo-chart-tooltip format="{0}%"></kendo-chart-tooltip>
+                                                <kendo-chart-series>
+                                                    <kendo-chart-series-item *ngFor="let item of series"
+                                                        type="{{item.type}}" style="smooth" [data]="item.data" [name]="item.name">
+                                                    </kendo-chart-series-item>
+                                                </kendo-chart-series>
+                                            </kendo-chart>
+                                        </div>
+                                    </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
