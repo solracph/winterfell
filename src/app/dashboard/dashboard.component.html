@@ -4,22 +4,23 @@ Drag widget <input type="checkbox" [(ngModel)]="dragWidgetOperation"/>
 <div class="row" dnd-sortable-container [sortableData]="containers" [dropZones]="['container-dropZone']">
     <div class="col-sm-12">
         <div class="row" *ngFor="let container of containers; let i = index" dnd-sortable [sortableIndex]="i" [dragEnabled]="dragOperation">
-            {{container.id}} - {{container.name}}
+            <h3>{{container.name}}</h3>
             <div class="col-sm-12">
                 <div class="row" dnd-sortable-container [sortableData]="container.widgets" [dropZones]="['widget-dropZone']">
                     <div class="col-sm-{{widget.width}}" *ngFor="let widget of container.widgets; let x = index"
                         dnd-sortable [sortableIndex]="x" [dragEnabled]="dragWidgetOperation">
-                            {{widget.name}}
-                            <kendo-chart [categoryAxis]="{ categories: categories }">
-                                <kendo-chart-title text="Gross domestic product growth /GDP annual %/"></kendo-chart-title>
-                                <kendo-chart-legend position="bottom" orientation="horizontal"></kendo-chart-legend>
-                                <kendo-chart-tooltip format="{0}%"></kendo-chart-tooltip>
-                                <kendo-chart-series>
-                                    <kendo-chart-series-item *ngFor="let item of series"
-                                        type="{{item.type}}" style="smooth" [data]="item.data" [name]="item.name">
-                                    </kendo-chart-series-item>
-                                </kendo-chart-series>
-                            </kendo-chart>
+                            <div class="box-shadow">
+                                <kendo-chart [categoryAxis]="{ categories: categories }">
+                                    <kendo-chart-title text="{{widget.name}}"></kendo-chart-title>
+                                    <kendo-chart-legend position="bottom" orientation="horizontal"></kendo-chart-legend>
+                                    <kendo-chart-tooltip format="{0}%"></kendo-chart-tooltip>
+                                    <kendo-chart-series>
+                                        <kendo-chart-series-item *ngFor="let item of series"
+                                            type="{{item.type}}" style="smooth" [data]="item.data" [name]="item.name">
+                                        </kendo-chart-series-item>
+                                    </kendo-chart-series>
+                                </kendo-chart>
+                            </div>
                     </div>
                 </div>
             </div>
