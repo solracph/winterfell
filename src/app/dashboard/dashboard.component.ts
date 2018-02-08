@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
 import { DashboardService } from './dashboard.service'
 import { Observable } from 'rxjs/Observable';
+import { forEach } from '@angular/router/src/utils/collection';
+
 
 
 @Component({
@@ -9,7 +11,16 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
 export class DashboardComponent implements OnInit {
+    
+  onItemDrop(e: any) {
+    this.dashboard.push(e.dragData)
+
+    for(var item in this.dashboard){
+      
+    }
+  }
 
   public events: string[] = [];
   public series: any[] = [{
@@ -28,12 +39,47 @@ export class DashboardComponent implements OnInit {
 
   public categories: number[] = [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011];
   
+  public dashboard = [{
+        id:1,
+        name: 'India',
+        col: [{ id:1, name: "Col 1" },{id:2, name: "Col 2" },{id:3, name: "Col 3" }]
+    }, {
+        id:2,
+        name: 'Russian Federation',
+        col: [{id:4, name: "Col 4" },{id:5, name: "Col 5" },{id:6, name: "Col 6" }]
+    }, {
+        id:3,
+        name: 'Germany',
+        col: [{id:7, name: "Col 7" }]
+    }, {
+        id:4,
+        name: 'World',
+        col: [{id:8, name: "Col 8" }]
+    }];
+
+    dragOperation: boolean = false;
+
+    containers: Array<Container> = [
+        new Container(1, 'Container 1', [new Widget('1','6'), new Widget('2','6')]),
+        new Container(2, 'Container 2', [new Widget('3','6'), new Widget('4','6')]),
+        new Container(3, 'Container 3', [new Widget('5','6'), new Widget('6','6')])
+    ];
+
   items: Observable<AngularFireAction<any>[]>;
 
   constructor(private service: DashboardService){
     this.items = this.service.getItems();
   }
-  
+
   ngOnInit() {
   }
+}
+
+
+class Container {
+  constructor(public id: number, public name: string, public widgets: Array<Widget>) {}
+}
+
+class Widget {
+  constructor(public name: string, public width: string) {}
 }
