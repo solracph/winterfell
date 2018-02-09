@@ -1,22 +1,21 @@
 .dnd-drag-start {
-
   opacity:0.7;
-  border: 2px dashed #000;
+  border: 2px dashed rgb(58, 148, 50);
 }
 
 .dnd-drag-enter {
   opacity:0.7;
-  border: 2px dashed #000;
+  border: 2px dashed rgb(58, 148, 50);
 }
 
 .dnd-drag-over {
-  border: 2px dashed #000;
+  opacity:0.7;
+  border: 2px dashed rgb(58, 148, 50);
 }
 
 .dnd-sortable-drag {
-
   opacity:0.7;
-  border: 1px dashed #000;
+  border: 2px dashed rgb(58, 148, 50);
 }
 
 .panel-body {
@@ -25,4 +24,11 @@
 .box-shadow{
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
   margin-bottom: 30px;
+}
+
+.card-body-widget-container{
+  margin: 1.25rem;
+}
+.card-body{
+  padding: 0 !important;
 }

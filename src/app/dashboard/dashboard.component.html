@@ -1,13 +1,15 @@
 <div class="row">
-    <div class="col-sm-12 box-shadow">
-            Drag Containers <input type="checkbox" [(ngModel)]="dragOperation"/>
-            Drag widget <input type="checkbox" [(ngModel)]="dragWidgetOperation"/>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".card-containers">
-                Collapse Containers
-            </button>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".card-widgets">
-                Collapse widgets
-            </button>
+    <div class="col-sm-12">
+        <nav class="navbar navbar-light bg-faded box-shadow">
+                Drag Containers <input type="checkbox" [(ngModel)]="dragOperation"/>
+                Drag widget <input type="checkbox" [(ngModel)]="dragWidgetOperation"/>
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target=".card-containers">
+                    Collapse Containers
+                </button>
+                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target=".card-widgets">
+                    Collapse widgets
+                </button>
+        </nav>
     </div>
 </div>
 
@@ -16,29 +18,34 @@
         <div class="row"  *ngFor="let container of containers; let i = index" dnd-sortable [sortableIndex]="i" [dragEnabled]="dragOperation">
             <div class="col-sm-12">
                 <div class="card box-shadow">
-                    <div class="card-header deep-orange lighten-1 white-text">
+                    <!--<div class="card-header deep-orange lighten-1 white-text" data-toggle="collapse" [attr.data-target]="'#container-' +container.id" >
                         {{container.name}}
-                    </div>
-                    <div class="card-body card-containers collapse show">
-                        <div class="row" dnd-sortable-container [sortableData]="container.widgets" [dropZones]="['widget-dropZone']">
-                            <div class="col-sm-{{widget.width}} " *ngFor="let widget of container.widgets; let x = index"
+                    </div>-->
+                    <div class="card-body">
+                        <div class="card-body-widget-container card-containers collapse show" id="container-{{container.id}}">
+                            <div class="row" dnd-sortable-container [sortableData]="container.widgets" [dropZones]="['widget-dropZone']">
+                                <div class="col-sm-{{widget.width}} " *ngFor="let widget of container.widgets; let x = index"
                                 dnd-sortable [sortableIndex]="x" [dragEnabled]="dragWidgetOperation">
                                     <div class="card box-shadow">
-                                        <div class="card-header deep-orange lighten-1 white-text"  >
+                                        <div class="card-header deep-orange lighten-1 white-text" data-toggle="collapse" [attr.data-target]="'#widget-' +widget.id" >
                                             {{widget.name}}
                                         </div>
-                                        <div class="card-body card-widgets collapse show" >
-                                            <kendo-chart [categoryAxis]="{ categories: categories }">
-                                                <kendo-chart-legend position="bottom" orientation="horizontal"></kendo-chart-legend>
-                                                <kendo-chart-tooltip format="{0}%"></kendo-chart-tooltip>
-                                                <kendo-chart-series>
-                                                    <kendo-chart-series-item *ngFor="let item of series"
-                                                        type="{{item.type}}" style="smooth" [data]="item.data" [name]="item.name">
-                                                    </kendo-chart-series-item>
-                                                </kendo-chart-series>
-                                            </kendo-chart>
+                                        <div class="card-body">
+                                            <div class="card-body-widget-container card-widgets collapse show" id="widget-{{widget.id}}">
+                                                <kendo-chart [pannable]="true" [zoomable]="true" [categoryAxis]="{ categories: categories }" [valueAxis]="valueAxis" (seriesClick)="seriesClick($event)">
+                                                        <kendo-chart-legend position="bottom" orientation="horizontal"></kendo-chart-legend>
+                                                        <kendo-chart-tooltip format="{0}%"></kendo-chart-tooltip>
+                                                        <kendo-chart-series>
+                                                            <kendo-chart-series-item *ngFor="let item of widget.data"
+                                                                type="{{item.type}}" style="smooth" [data]="item.data" [name]="item.name" [color]="item.color"
+                                                               >
+                                                            </kendo-chart-series-item>
+                                                        </kendo-chart-series>
+                                                </kendo-chart>
+                                                </div>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
