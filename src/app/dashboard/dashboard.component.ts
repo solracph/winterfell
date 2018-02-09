@@ -17,6 +17,8 @@ export class DashboardComponent implements OnInit {
  
   seriesClick(e: any){
     console.log(e.dataItem.id)
+    console.log(e.dataItem);
+    console.log(e);
   }
 
   
@@ -28,41 +30,43 @@ export class DashboardComponent implements OnInit {
         reports:
         [{
             id: 1,
-            serie:
+            categories: ["HC5.1", "HC6.1", "HC7.1", "HC7.2", "HC8.1", "HC8.2"],
+            series:
                 [{
                     name: 'Center',
                     color: '#689f38',
-                    type: 'line',
+                    type: 'column',
                     data: [{id:1, value: 1.3164}, {id:2, value: 98.0392}, {id:3, value: 63.6892},{id:4, value: 66.9572} , {id:5, value: 56.8627},{id:6, value: 3.939} ]
                 },{
                     name: 'Mean',
                     color: '#0288d1',
-                    type: 'bar',
+                    type: 'column',
                     data: [{id:1, value: 57.4047}, {id:2, value: 56.8627}, {id:3, value: 3.994},{id:4, value: 3.464} , {id:5, value: 4.001},{id:6, value: 3.939} ]
                 }, {
                     name: 'Goal',
                     color: '#fbc02d',
-                    type: 'bar',
-                    data: [{id:1, value: 1.0000}, {id:2, value: 1.0000}, {id:3, value: 1.0000},{id:4, value: 1.0000} , {id:5, value: 1.0000},{id:6, value: 1.0000} ]
+                    type: 'line',
+                    data: [{id:1, value: 1.0000}, {id:2, value: 20.0000}, {id:3, value: 1.0000},{id:4, value: 1.0000} , {id:5, value: 1.0000},{id:6, value: 1.0000} ]
                 }]
         }
         ,{
             id: 2,
-            serie:
+            categories: ["HC5.1", "HC6.1", "HC7.1", "HC7.2", "HC8.1", "HC8.2"],
+            series:
                 [{
                     name: 'Center',
                     color: '#689f38',
-                    type: 'line',
+                    type: 'column',
                     data: [{id:1, value: 1.3164}, {id:2, value: 98.0392}, {id:3, value: 53.6892},{id:4, value: 67.9572} , {id:5, value: 59.8627},{id:6, value: 3.939} ]
                 },{
                     name: 'Mean',
                     color: '#0288d1',
-                    type: 'bar',
+                    type: 'column',
                     data: [{id:1, value: 36.4047}, {id:2, value: 56.8627}, {id:3, value: 5.994},{id:4, value: 2.464} , {id:5, value: 4.001},{id:6, value: 3.939} ]
                 }, {
                     name: 'Goal',
                     color: '#fbc02d',
-                    type: 'bar',
+                    type: 'line',
                     data: [{id:1, value: 1.0000}, {id:2, value: 4.0000}, {id:3, value: 1.0000},{id:4, value: 6.0000} , {id:5, value: 1.0000},{id:6, value: 1.0000} ]
                 }]
         }]
@@ -79,25 +83,25 @@ export class DashboardComponent implements OnInit {
     dragOperation: boolean = false;
 
     containers: Array<Container> = [
-        new Container(1, 'Container 1', [new Widget(1,'1','6',[],["HC5.1", "HC6.1", "HC7.1", "HC7.2", "HC8.1", "HC8.2"]) ,new Widget(2,'2','6',[],["HC5.1", "HC6.1", "HC7.1", "HC7.2", "HC8.1", "HC8.2"])]),
+        new Container(1, 'Container 1', [new Widget(1,'1','6',[],[]) ,new Widget(2,'2','6',[],[])]),
         new Container(2, 'Container 2', []),
-        new Container(3, 'Container 3', [new Widget(5,'5','6',[],["HC5.1", "HC6.1", "HC7.1", "HC7.2", "HC8.1", "HC8.2"]), new Widget(6,'6','6',[],["HC5.1", "HC6.1", "HC7.1", "HC7.2", "HC8.1", "HC8.2"])])
+        new Container(3, 'Container 3', [new Widget(5,'5','6',[],[]), new Widget(6,'6','6',[],[])])
     ];
 
   items: Observable<AngularFireAction<any>[]>;
 
     getwidgetSeries(id:number): Promise<any>{
-        var serie;
+        var reports;
         this.series.reports.forEach(
             report =>{
                 if(report.id == id)
                 {
-                    serie = report.serie;
+                    reports = report;
                 }
             }
         );
 
-        return Promise.resolve(serie);
+        return Promise.resolve(reports);
     }
 
     constructor(private service: DashboardService){
@@ -110,8 +114,9 @@ export class DashboardComponent implements OnInit {
             container.widgets.forEach(
                 widget => {
                     this.getwidgetSeries(widget.id).then(data => {
-                        widget.data = data;
-                        widget.categories = widget.categories;
+                        console.log(data)
+                        widget.data = data.series;
+                        widget.categories = data.categories;
                     })
                 }
             )
@@ -126,7 +131,8 @@ interface Series {
 
 interface WidgetReport {
     id : number,
-    serie : Array<SerieConfiguration>
+    categories: any,
+    series : Array<SerieConfiguration>
 }
 
 interface SerieConfiguration{

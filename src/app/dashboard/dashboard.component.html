@@ -3,12 +3,6 @@
         <nav class="navbar navbar-light bg-faded box-shadow">
                 Drag Containers <input type="checkbox" [(ngModel)]="dragOperation"/>
                 Drag widget <input type="checkbox" [(ngModel)]="dragWidgetOperation"/>
-                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target=".card-containers">
-                    Collapse Containers
-                </button>
-                <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target=".card-widgets">
-                    Collapse widgets
-                </button>
         </nav>
     </div>
 </div>
@@ -35,15 +29,14 @@
                                                 <kendo-chart   orientation="horizontal"
                                                     [pannable]="true" 
                                                     [zoomable]="true" 
-                                                    [categoryAxis]="{ categories: widget.categories }" 
+                                                    [categoryAxis]="{ categories: widget.categories ,justified : true}" 
                                                     [valueAxis]="valueAxis" 
                                                     (seriesClick)="seriesClick($event)">
-                                                        <kendo-chart-legend position="bottom" orientation="vertical"></kendo-chart-legend>
+                                                        <kendo-chart-legend position="bottom" orientation="horizontal"></kendo-chart-legend>
                                                         <kendo-chart-tooltip format="{0}%"></kendo-chart-tooltip>
                                                         <kendo-chart-series>
                                                             <kendo-chart-series-item *ngFor="let item of widget.data"
-                                                                type="{{item.type}}" style="smooth" [data]="item.data" [name]="item.name" [color]="item.color"
-                                                               >
+                                                                type="{{item.type}}" style="smooth" [data]="item.data" [name]="item.name" [color]="item.color">
                                                             </kendo-chart-series-item>
                                                         </kendo-chart-series>
                                                 </kendo-chart>
