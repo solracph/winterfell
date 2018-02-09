@@ -32,3 +32,6 @@
 .card-body{
   padding: 0 !important;
 }
+.row-drop-zones {
+  min-height: 20px;
+}

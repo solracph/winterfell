@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
                 },{
                     name: 'Mean',
                     color: '#0288d1',
-                    type: 'line',
+                    type: 'bar',
                     data: [{id:1, value: 36.4047}, {id:2, value: 56.8627}, {id:3, value: 5.994},{id:4, value: 2.464} , {id:5, value: 4.001},{id:6, value: 3.939} ]
                 }, {
                     name: 'Goal',
@@ -79,16 +79,15 @@ export class DashboardComponent implements OnInit {
     dragOperation: boolean = false;
 
     containers: Array<Container> = [
-        new Container(1, 'Container 1', [new Widget(1,'1','6',[]) ,new Widget(2,'2','6',[])])
-       /* new Container(2, 'Container 2', [new Widget(3,'3','4'), new Widget(4,'4','6')]),
-        new Container(3, 'Container 3', [new Widget(5,'5','6'), new Widget(6,'6','6')])*/
+        new Container(1, 'Container 1', [new Widget(1,'1','6',[],["HC5.1", "HC6.1", "HC7.1", "HC7.2", "HC8.1", "HC8.2"]) ,new Widget(2,'2','6',[],["HC5.1", "HC6.1", "HC7.1", "HC7.2", "HC8.1", "HC8.2"])]),
+        new Container(2, 'Container 2', []),
+        new Container(3, 'Container 3', [new Widget(5,'5','6',[],["HC5.1", "HC6.1", "HC7.1", "HC7.2", "HC8.1", "HC8.2"]), new Widget(6,'6','6',[],["HC5.1", "HC6.1", "HC7.1", "HC7.2", "HC8.1", "HC8.2"])])
     ];
 
   items: Observable<AngularFireAction<any>[]>;
 
     getwidgetSeries(id:number): Promise<any>{
         var serie;
-
         this.series.reports.forEach(
             report =>{
                 if(report.id == id)
@@ -112,6 +111,7 @@ export class DashboardComponent implements OnInit {
                 widget => {
                     this.getwidgetSeries(widget.id).then(data => {
                         widget.data = data;
+                        widget.categories = widget.categories;
                     })
                 }
             )
@@ -146,7 +146,7 @@ class Container {
 }
 
 class Widget {
-  constructor(public id: number,public name: string, public width: string, public data: any) {
+  constructor(public id: number,public name: string, public width: string, public data: any,public categories: any) {
     
   }
 }
